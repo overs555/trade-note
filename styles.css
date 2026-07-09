@@ -135,7 +135,13 @@ input:focus, textarea:focus { border-color: #71907d; box-shadow: 0 0 0 3px rgba(
 .input-unit b { padding: 0 12px; color: #879087; font-size: 12px; font-weight: 600; }
 
 .segmented { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.segmented input { position: absolute; opacity: 0; pointer-events: none; }
+.segmented input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
 .segmented span {
   display: grid;
   place-items: center;
