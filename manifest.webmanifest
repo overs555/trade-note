@@ -1,0 +1,18 @@
+{
+  "name": "Trade Note — 株式トレード記録",
+  "short_name": "Trade Note",
+  "description": "判断を残して、次のトレードを少し良く。",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f5f7f3",
+  "theme_color": "#2d6048",
+  "lang": "ja",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
