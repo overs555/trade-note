@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2d6048">
+  <meta name="description" content="シンプルな株式トレード記録アプリ">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <title>Trade Note — 株式トレード記録</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">PERSONAL TRADE JOURNAL</p>
+        <h1>Trade Note</h1>
+        <p class="subtitle">判断を残して、次のトレードを少し良く。</p>
+      </div>
+      <button id="exportButton" class="ghost-button" type="button">CSVで書き出す</button>
+    </header>
+
+    <section class="summary" aria-label="集計">
+      <article>
+        <span>記録件数</span>
+        <strong id="tradeCount">0</strong>
+        <small>TRADES</small>
+      </article>
+      <article>
+        <span>買付合計</span>
+        <strong id="buyTotal">¥0</strong>
+        <small>BUY</small>
+      </article>
+      <article>
+        <span>売却合計</span>
+        <strong id="sellTotal">¥0</strong>
+        <small>SELL</small>
+      </article>
+    </section>
+
+    <section class="workspace">
+      <form id="tradeForm" class="trade-form">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">NEW ENTRY</p>
+            <h2 id="formTitle">トレードを記録</h2>
+          </div>
+          <button id="cancelEditButton" class="text-button hidden" type="button">編集をやめる</button>
+        </div>
+
+        <input id="tradeId" type="hidden">
+
+        <label class="field field-wide">
+          <span>銘柄名・コード</span>
+          <input id="symbol" type="text" placeholder="例：7203 トヨタ自動車" required maxlength="40">
+        </label>
+
+        <fieldset class="field field-wide">
+          <legend>売買区分</legend>
+          <div class="segmented">
+            <label><input type="radio" name="side" value="buy" checked><span>買い</span></label>
+            <label><input type="radio" name="side" value="sell"><span>売り</span></label>
+          </div>
+        </fieldset>
+
+        <label class="field">
+          <span>約定価格</span>
+          <div class="input-unit"><b>¥</b><input id="price" type="number" min="0" step="0.01" placeholder="2,500" required></div>
+        </label>
+
+        <label class="field">
+          <span>数量</span>
+          <div class="input-unit"><input id="quantity" type="number" min="1" step="1" placeholder="100" required><b>株</b></div>
+        </label>
+
+        <label class="field field-wide">
+          <span>約定日時</span>
+          <input id="tradedAt" type="datetime-local" required>
+        </label>
+
+        <label class="field field-wide">
+          <span>メモ <em>任意</em></span>
+          <textarea id="memo" rows="3" maxlength="300" placeholder="エントリーの理由、気づいたことなど"></textarea>
+        </label>
+
+        <button class="primary-button field-wide" type="submit">
+          <span id="submitLabel">記録を保存</span><span aria-hidden="true">→</span>
+        </button>
+      </form>
+
+      <section class="history">
+        <div class="section-heading history-heading">
+          <div>
+            <p class="eyebrow">HISTORY</p>
+            <h2>取引履歴</h2>
+          </div>
+          <label class="search">
+            <span aria-hidden="true">⌕</span>
+            <input id="searchInput" type="search" placeholder="銘柄を検索">
+          </label>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+          <div>↗</div>
+          <h3>まだ記録がありません</h3>
+          <p>最初のトレードを左のフォームから追加しましょう。</p>
+        </div>
+
+        <div id="tradeList" class="trade-list"></div>
+      </section>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
